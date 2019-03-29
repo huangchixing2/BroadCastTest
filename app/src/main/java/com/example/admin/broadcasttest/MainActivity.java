@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -40,7 +42,17 @@ public class MainActivity extends AppCompatActivity {
         //当有广播到来时，onReceive会执行
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(context, "network changed",Toast.LENGTH_LONG).show();
+            //这是一个系统服务类，专门用于管理网络的
+            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            //判断是否有网络
+            if(networkInfo != null && networkInfo.isConnected()){
+                Toast.makeText(context, "network is available",Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(context, "network is unavailable",Toast.LENGTH_LONG).show();
+            }
+
+
         }
     }
 }
