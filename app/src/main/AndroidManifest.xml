@@ -4,7 +4,7 @@
 
     <!-- 访问系统的网络状态需要申明的权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--开机广播注册-->
+    <!-- 开机广播注册 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
@@ -25,11 +25,21 @@
         <receiver
             android:name=".BootCompleteReceiver"
             android:enabled="true"
-            android:exported="true">   <!--是否允许这个广播接收器接受本程序以外的广播-->
+            android:exported="true"> <!-- 是否允许这个广播接收器接受本程序以外的广播 -->
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.admin.broadcasttest.MY_BROADCAST" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>
